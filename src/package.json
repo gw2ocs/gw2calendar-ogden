@@ -1,0 +1,23 @@
+{
+	"name": "gw2calendar",
+	"version": "1.0.0",
+	"description": "Widget for french GW2 Wintersday calendar",
+	"type": "module",
+	"main": "server.js",
+	"scripts": {
+		"start": "npm i && node ./bin/www.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Pandraghon <pandraghon@outlook.com>",
+	"license": "MIT",
+	"dependencies": {
+		"express": "^4.17.2",
+		"pg": "^8.7.1",
+		"dotenv": "^10.0.0",
+		"node-fetch": "^3.1.0",
+		"body-parser": "^1.19.1",
+		"diacritics": "github:andrewrk/node-diacritics"
+	}
+  }
+  

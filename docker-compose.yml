@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:14
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  node:
+    image: node
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    working_dir: /home/node/app
+    environment:
+      - VIRTUAL_HOST=widget.gw2trivia.com
+      - LETSENCRYPT_HOST=widget.gw2trivia.com
+      - NODE_ENV=production
+    volumes:
+      - ./src/:/home/node/app:rw
+    ports:
+      - 8083:3000
+    command: "npm start"
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
