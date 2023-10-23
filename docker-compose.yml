@@ -4,6 +4,7 @@ services:
 
   postgres:
     image: postgres:14
+    restart: unless-stopped
     ports:
       - 5435:5432
     environment:
@@ -20,12 +21,14 @@ services:
       - postgres
     depends_on:
       - postgres
+    networks:
+      - proxy
+      - default
     env_file:
       - .env
     working_dir: /home/node/app
+    restart: unless-stopped
     environment:
-      - VIRTUAL_HOST=widget.gw2trivia.com
-      - LETSENCRYPT_HOST=widget.gw2trivia.com
       - NODE_ENV=production
     volumes:
       - ./src/:/home/node/app:rw
@@ -34,6 +37,5 @@ services:
     command: "npm start"
 
 networks:
-  default:
-    external:
-      name: nginx-proxy
+  proxy:
+    external: true
