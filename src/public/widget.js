@@ -253,10 +253,10 @@ class OgdenQuiz extends HTMLElement {
         });
       }
 
-      const { question_id, title } = response.data;
-      this.question_id = question_id;
+      const { external_id, title } = response.data;
+      this.question_id = external_id;
       Object.assign(titleEl, {
-        href: `https://gw2trivia.com/questions/view/${question_id}/calendar`,
+        href: `https://gw2trivia.com/questions/view/${this.question_id}/calendar`,
         innerText: title
       });
       this.shadow.querySelector('.not-already').hidden = false;

@@ -38,7 +38,7 @@ app.get('/', async (req, res) => {
 
 app.get('/question_of_the_day', async (req, res) => {
     try {
-        const { rows: questionRows} = await pgPool.query('SELECT question_id, title FROM questions WHERE day = $1', [now().getDate()]);
+        const { rows: questionRows} = await pgPool.query("SELECT external_id, title FROM questions WHERE date = $1", [now()]);
         if (!questionRows.length) {
             return res.send({ error: 'Pas de question pour aujourd\'hui !' });
         }
@@ -52,7 +52,7 @@ app.get('/question_of_the_day', async (req, res) => {
 app.post('/check_account', async (req, res) => {
     const { account } = req.body;
     try {
-        const { rows } = await pgPool.query('SELECT COUNT(*) FROM participations WHERE day = $1 AND account = $2 AND valid is TRUE', [now().getDate(), account]);
+        const { rows } = await pgPool.query("SELECT COUNT(*) FROM participations WHERE (date+'2:00')::date = $1 AND account = $2 AND valid is TRUE", [now(), account]);
         res.send({ data: rows[0].count !== '0' }); 
     } catch (e) {
         console.error(e);
@@ -69,12 +69,12 @@ const testAnswer = (answers, text) => {
 app.post('/check_answer', async (req, res) => {
     const { uid, account, token, answer } = req.body;
     try {
-        const { rows } = await pgPool.query('SELECT COUNT(*) FROM participations WHERE day = $1 AND account = $2 AND valid is TRUE', [now().getDate(), account]);
+        const { rows } = await pgPool.query("SELECT COUNT(*) FROM participations WHERE (date+'2:00')::date = $1 AND account = $2 AND valid is TRUE", [now(), account]);
         console.log(rows);
         if (rows[0].count !== '0') {
             return res.send({ error: 'Vous avez déjà participé aujourd\'hui. Revenez demain pour la prochaine question !'});
         }
-        const { rows: answerRows } = await pgPool.query('SELECT content FROM answers a LEFT JOIN questions q ON a.question_id = q.question_id WHERE day = $1', [now().getDate()]);
+        const { rows: answerRows } = await pgPool.query('SELECT content FROM answers a LEFT JOIN questions q ON a.question_external_id = q.external_id WHERE date = $1', [now()]);
         const result = testAnswer(answerRows, answer);
         const ret = { data: result };
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
@@ -106,20 +106,20 @@ app.post('/check_answer', async (req, res) => {
                 */
                 switch (res.status) {
                     case 200:
-                        await pgPool.query('INSERT INTO participations (account, content, ip, valid, day) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, result, now().getDate()]);
+                        await pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, result]);
                         break;
                     default:
-                        await pgPool.query('INSERT INTO participations (account, content, ip, valid, day) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, false, now().getDate()]);
-                        ret.error = `Une erreur s'est produite. Code d'erreur : ${res.status}. Veuillez réessayer, et si l'erreur persiste, contacter l'administrateur.`;
+                        await pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, false]);
+                        ret.error = `Une erreur (code :  ${res.status}) est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.`;
                         break;
                 }
             }).catch(async err => {
                 console.error(err);
-                pgPool.query('INSERT INTO participations (account, content, ip, valid, day) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, false, now().getDate()]);
-                ret.error = `Une erreur s'est produite. Veuillez réessayer, et si l'erreur persiste, contacter l'administrateur.`;
+                pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, false]);
+                ret.error = `Une erreur est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.`;
             });
         } else {
-            pgPool.query('INSERT INTO participations (account, content, ip, valid, day) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, result, now().getDate()]);
+            pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, result]);
         }
 
         console.log('returning ', ret);
