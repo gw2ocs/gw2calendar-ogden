@@ -79,6 +79,21 @@ class OgdenQuiz extends HTMLElement {
         transform: translateY(-55%);
       }
 
+      .notification {
+        position: relative;
+        border-radius: 40px;
+        padding: 8px 16px;
+        text-align: center;
+        top: -90px;
+        right: -160px;
+        box-shadow: 0 1px black;
+        font-weight: bold;
+      }
+
+      .notification:not([hidden]) {
+        display: inline-block;
+      }
+
       main, header, footer {
         padding: .75rem 1.5rem;
       }
@@ -139,6 +154,19 @@ class OgdenQuiz extends HTMLElement {
         color: red;
       }
 
+      .floating {  
+        animation-name: floating;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+      }
+
+      @keyframes floating {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 15px); }
+        100%   { transform: translate(0, -0px); }    
+      }
+
       @media (max-width: 500px) {
         :host {
           right: 0;
@@ -163,6 +191,7 @@ class OgdenQuiz extends HTMLElement {
         }
       }
     </style>
+    <aside class="notification floating" hidden>!</aside>
     <header>
       <h1>Questions pour un présent</h1>
       <div class="close">X</div>
