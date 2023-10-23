@@ -38,7 +38,7 @@ app.get('/', async (req, res) => {
 
 app.get('/question_of_the_day', async (req, res) => {
     try {
-        const { rows: questionRows} = await pgPool.query("SELECT question_id, title FROM questions WHERE date = $1", [now()]);
+        const { rows: questionRows} = await pgPool.query("SELECT external_id, title FROM questions WHERE date = $1", [now()]);
         if (!questionRows.length) {
             return res.send({ error: 'Pas de question pour aujourd\'hui !' });
         }
@@ -74,7 +74,7 @@ app.post('/check_answer', async (req, res) => {
         if (rows[0].count !== '0') {
             return res.send({ error: 'Vous avez déjà participé aujourd\'hui. Revenez demain pour la prochaine question !'});
         }
-        const { rows: answerRows } = await pgPool.query('SELECT content FROM answers a LEFT JOIN questions q ON a.question_id = q.question_id WHERE date = $1', [now()]);
+        const { rows: answerRows } = await pgPool.query('SELECT content FROM answers a LEFT JOIN questions q ON a.question_external_id = q.external_id WHERE date = $1', [now()]);
         const result = testAnswer(answerRows, answer);
         const ret = { data: result };
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;

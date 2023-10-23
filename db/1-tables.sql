@@ -1,10 +1,10 @@
 CREATE TABLE answers (
     id serial PRIMARY KEY,
-    question_id integer NOT NULL,
+    question_external_id integer NOT NULL,
     content character varying NOT NULL
 );
 
-COMMENT ON COLUMN answers.question_id IS 'ID of the question on GW2Trivia';
+COMMENT ON COLUMN answers.question_external_id IS 'ID of the question on GW2Trivia';
 COMMENT ON COLUMN answers.content IS 'Expected answer(s)';
 
 CREATE TABLE participations (
