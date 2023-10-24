@@ -80,12 +80,12 @@ class OgdenQuiz extends HTMLElement {
       }
 
       .notification {
-        position: relative;
+        position: absolute;
         border-radius: 40px;
         padding: 8px 16px;
         text-align: center;
-        top: -90px;
-        right: -160px;
+        top: -95px;
+        right: 145px;
         box-shadow: 0 1px black;
         font-weight: bold;
       }
