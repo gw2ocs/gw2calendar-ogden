@@ -1,59 +1,46 @@
+<!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
 
         <title>Calendrier de l'avent communautaire</title>
         <meta name="title" content="Calendrier de l'avent communautaire">
-        <meta name="description" content="Calendrier de l'avent communautaire Guild Wars 2, sponsorisé par ArenaNet, avec la participation d'Archibald Wirslayd, Auron, Baderas, GW2.FR, GW2Shop, Historien Atis, Le Bus Magique, MMOShards, Nico Le Ch&#039;ti, RisingSun, Sam Ajesté et Uncle Skarzi.">
-
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://calendrier.gw2.fr">
-        <meta property="og:title" content="Calendrier de l'avent communautaire">
-        <meta property="og:description" content="Calendrier de l'avent communautaire Guild Wars 2, sponsorisé par ArenaNet, avec la participation d'Archibald Wirslayd, Auron, Baderas, GW2.FR, GW2Shop, Historien Atis, Le Bus Magique, MMOShards, Nico Le Ch&#039;ti, RisingSun, Sam Ajesté et Uncle Skarzi.">
-        <meta property="og:image" content="https://calendrier.gw2.fr/calendrier-avent-2021.png">
-
-        <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://calendrier.gw2.fr">
-        <meta property="twitter:title" content="Calendrier de l'avent communautaire">
-        <meta property="twitter:description" content="Calendrier de l'avent communautaire Guild Wars 2, sponsorisé par ArenaNet, avec la participation d'Archibald Wirslayd, Auron, Baderas, GW2.FR, GW2Shop, Historien Atis, Le Bus Magique, MMOShards, Nico Le Ch&#039;ti, RisingSun, Sam Ajesté et Uncle Skarzi.">
-        <meta property="twitter:image" content="https://calendrier.gw2.fr/calendrier-avent-2021.png">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="https://calendrier.gw2.fr/favicon.png" />
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://calendrier.gw2.fr/build/578.d4e5a384.css"><link rel="stylesheet" href="https://calendrier.gw2.fr/build/app.748916d0.css">
-            
-        <!-- Matomo -->
-        <script>
-            var _paq = window._paq = window._paq || [];
-            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(["disableCookies"]);
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-                var u="//analytics.an-d.me/";
-                _paq.push(['setTrackerUrl', u+'matomo.php']);
-                _paq.push(['setSiteId', '7']);
-                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-            })();
-        </script>
-        <!-- End Matomo Code -->
-    </head>
-    <body class="page_home">
+        <link rel="stylesheet" href="https://calendrier.gw2.fr/build/104.9d1be233.css"><link rel="stylesheet" href="https://calendrier.gw2.fr/build/app.2fa901c9.css">
 
-    <div class="py-4 bg-white bg-opacity-50">
-        <div class="flex container mx-auto items-center px-4">
-            <div class="w-1/2">
-                <h3 class="text-md md:text-xl font-bold text-color text-shadow"><a href="/">Calendrier de&nbsp;l'avent<span class="hidden md:inline"> communautaire</span></a></h3>
-            </div>
-            <div class="w-1/2">
-                                    <ul class="flex justify-end">
-                        <li>
-                            <a href="/login" class="inline-block bg-red-500 hover:bg-red-600 text-white rounded py-2 px-4"><i class="fas fa-unlock"></i><span class="hidden sm:inline ml-2">Connexion</span></a>
+    </head>
+    <body class="page_home theme-dark">
+
+    <div id="navigation" class="py-4">
+        <div class="flex mx-auto items-center px-4 gap-4 whitespace-nowrap justify-between h-full">
+            <h3 class="text-xl font-bold"><a href="/" class="truncate">Calendrier de l'avent<span class="hidden md:inline"> communautaire</span></a></h3>
+            <div class="">
+                                    <ul class="flex justify-end h-full items-center gap-4">
+                        <li class="hidden lg:block font-bold">
+                            <a href="https://calendrier.gw2.fr/conte-hivernel" class="flex gap-2 items-center">
+                                <i class="fa-solid fa-book text-xl"></i>
+                                Conte d'Hivernel
+                            </a>
                         </li>
-                        <li>
-                            <a href="/register" class="inline-block bg-red-500 hover:bg-red-600 text-white rounded py-2 px-4 ml-4"><i class="fas fa-feather-alt"></i><span class="hidden sm:inline ml-2">Inscription</span></a>
+                        <li class="hidden lg:block font-bold">
+                            <a href="https://calendrier.gw2.fr/connexion" class="flex gap-2 items-center">
+                                <i class="fa-solid fa-unlock text-xl"></i>
+                                Connexion
+                            </a>
+                        </li>
+                        <li class="hidden lg:block font-bold">
+                            <a href="https://calendrier.gw2.fr/inscription" class="flex gap-2 items-center">
+                                <i class="fa-solid fa-feather-pointed text-xl"></i>
+                                Inscription
+                            </a>
+                        </li>
+                        <li class="block lg:hidden font-bold">
+                            <a href="#menu" class="flex gap-2 items-center" data-lightbox>
+                                <i class="fa-solid fa-bars text-2xl"></i>
+                                Menu
+                            </a>
                         </li>
                     </ul>
                             </div>
@@ -63,324 +50,85 @@
     
     <div id="content" class="pt-8">
         
-    <div class="overlay" style="height: 300px; width: 100%;"></div>
+    <div class="overlay relative" style="height: 300px; width: 100%;">
+            </div>
 
+            <div class="container mx-auto px-4 text-center text-color text-xl md:text-2xl text-shadow font-bold py-2 my-16 md:py-6 md:my-32">
+            <div>Le calendrier sera disponible dans&nbsp;:</div>
+            <div id="start-at" data-start="2023-12-01"></div>
+            <div class="mt-4">Profitez-en pour <a href="https://calendrier.gw2.fr/inscription" class="underline">vous inscrire</a>, si ce n'est pas déjà fait&nbsp;!</div>  
+            <form action="#" id="test-form">
+                <label for="uid">UID : </label><input type="text" name="uid" id="uid"><br>
+                <label for="account">Account : </label><input type="text" name="account" id="account"><br>
+                <label for="token">Token : </label><input type="text" name="token" id="token"><br>
+                <input type="submit">
+            </form>
+            </div>
     
-            <div class="container mx-auto mb-8 px-4 mt-12">
-
-                <form action="#" id="test-form">
-                    <label for="uid">UID : </label><input type="text" name="uid" id="uid"><br>
-                    <label for="account">Account : </label><input type="text" name="account" id="account"><br>
-                    <label for="token">Token : </label><input type="text" name="token" id="token"><br>
-                    <input type="submit">
-                </form>
-            <h2 class="text-2xl text-color text-shadow font-bold text-center">Gagnant·e·s du calendrier<br />de l'avent communautaire</h2>
-
-                            <div class="max-w-md mx-auto">
-                    <h3 class="text-lg text-center py-2 px-3 bg-red-600 text-white font-bold mt-6">Jour 1 - GW2.FR</h3>
-                                            <div class="font-semibold text-gray-800">
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>anko.5043</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>elusiverain.4825</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>ElTetardo.9245</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Blacky.7364</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 tenue d&#039;Aurene</span>
-                                    <span>Moracle.8732</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>250 présents d&#039;Hivernel</span>
-                                    <span>Koseki.6470</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 présent d&#039;Hivernel verdoyant gelé</span>
-                                    <span>Isbjorn.4692</span>
-                                </div>
-                                                    </div>
-                                    </div>
-                            <div class="max-w-md mx-auto">
-                    <h3 class="text-lg text-center py-2 px-3 bg-red-600 text-white font-bold mt-6">Jour 2 - RisingSun</h3>
-                                            <div class="font-semibold text-gray-800">
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Sixy Apple.5391</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Eowynne.3745</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Yuky.1087</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>deus athena.4287</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 tenue d&#039;Aurene</span>
-                                    <span>Sayena.7145</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>250 présents d&#039;Hivernel</span>
-                                    <span>Algo.2698</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 présent d&#039;Hivernel verdoyant gelé</span>
-                                    <span>gory.1463</span>
-                                </div>
-                                                    </div>
-                                    </div>
-                            <div class="max-w-md mx-auto">
-                    <h3 class="text-lg text-center py-2 px-3 bg-red-600 text-white font-bold mt-6">Jour 3 - Baderas</h3>
-                                            <div class="font-semibold text-gray-800">
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Sheshire.8297</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Seamusronin.9367</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Mota.5307</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>notbobbyfrasier.3564</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 tenue d&#039;Aurene</span>
-                                    <span>lolotte.9143</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>250 présents d&#039;Hivernel</span>
-                                    <span>alexxxxx.8296</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 présent d&#039;Hivernel verdoyant gelé</span>
-                                    <span>Maxxime.1207</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 apparence de pistolet du dominateur</span>
-                                    <span>ElodeaXIII.2651</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>10 pièces mystiques</span>
-                                    <span>Korben.8413</span>
-                                </div>
-                                                    </div>
-                                    </div>
-                            <div class="max-w-md mx-auto">
-                    <h3 class="text-lg text-center py-2 px-3 bg-red-600 text-white font-bold mt-6">Jour 4 - Historien Atis</h3>
-                                            <div class="font-semibold text-gray-800">
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Gattina.7291</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>BreeenC.5017</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Toxiiine.3469</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Spartacus.4851</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 tenue d&#039;Aurene</span>
-                                    <span>Miruto.9731</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>250 présents d&#039;Hivernel</span>
-                                    <span>Luchta.6173</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 présent d&#039;Hivernel verdoyant gelé</span>
-                                    <span>Angerfist red.5610</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 apparence de bouclier de gargouille</span>
-                                    <span>mabacool.9218</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>10 pièces mystiques</span>
-                                    <span>Ryuuhaku.5861</span>
-                                </div>
-                                                    </div>
-                                    </div>
-                            <div class="max-w-md mx-auto">
-                    <h3 class="text-lg text-center py-2 px-3 bg-red-600 text-white font-bold mt-6">Jour 5 - Sam Ajesté</h3>
-                                            <div class="font-semibold text-gray-800">
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Angelus.7426</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>clopinclopan.9603</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Packdecrocs.9162</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Nayumia.1764</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 tenue d&#039;Aurene</span>
-                                    <span>trunkspyro.2147</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>250 présents d&#039;Hivernel</span>
-                                    <span>Killer beaN.6481</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 présent d&#039;Hivernel verdoyant gelé</span>
-                                    <span>aya.7834</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 apparence d&#039;espadon envenimeux</span>
-                                    <span>MiHa.2746</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>10 pièces mystiques</span>
-                                    <span>sadik.2859</span>
-                                </div>
-                                                    </div>
-                                    </div>
-                            <div class="max-w-md mx-auto">
-                    <h3 class="text-lg text-center py-2 px-3 bg-red-600 text-white font-bold mt-6">Jour 6 - Nico Le Ch&#039;ti</h3>
-                                            <div class="font-semibold text-gray-800">
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Alrun.2537</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>Kaell.2395</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>akaha.6813</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>Mithrandir.1089</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 tenue d&#039;Aurene</span>
-                                    <span>Rodstar.4026</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>250 présents d&#039;Hivernel</span>
-                                    <span>Sasakyo.5347</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 présent d&#039;Hivernel verdoyant gelé</span>
-                                    <span>Blountede.4832</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 apparence de torche de gargouille</span>
-                                    <span>JackDHoney.6512</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>10 pièces mystiques</span>
-                                    <span>DobMelody.7913</span>
-                                </div>
-                                                    </div>
-                                    </div>
-                            <div class="max-w-md mx-auto">
-                    <h3 class="text-lg text-center py-2 px-3 bg-red-600 text-white font-bold mt-6">Jour 7 - Le Bus Magique</h3>
-                                            <div class="font-semibold text-gray-800">
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>axel.5139</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 code de 400 gemmes</span>
-                                    <span>yture.7352</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>mco.8631</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 coffre communautaire</span>
-                                    <span>shun.6483</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 tenue d&#039;Aurene</span>
-                                    <span>Sasu.1670</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>250 présents d&#039;Hivernel</span>
-                                    <span>KingDatouX.9530</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 présent d&#039;Hivernel verdoyant gelé</span>
-                                    <span>Enawdor.8531</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>1 apparence de bâton du dominateur</span>
-                                    <span>mistercree.5297</span>
-                                </div>
-                                                            <div class="w-full flex justify-between border-b border-white border-opacity-50 py-2">
-                                    <span>10 pièces mystiques</span>
-                                    <span>Nimue.6249</span>
-                                </div>
-                                                    </div>
-                                    </div>
-            
-        </div>
+    
     
     
     </div>
 
-    <div id="footer" class="text-center mx-auto px-4 mt-16 py-16 text-black bg-white bg-opacity-50">
+    <div id="footer" class="text-center mx-auto px-4 mt-16 py-16">
         <div class="container mx-auto">
-            <p>Concours sponsorisé par ArenaNet, avec la participation de&nbsp;:<br />Archibald Wirslayd, Auron, Baderas, GW2.FR, GW2Shop, Historien Atis, Le Bus Magique, MMOShards, Nico Le Ch&#039;ti, RisingSun, Sam Ajesté et Uncle Skarzi.</p>
-            <p class="mt-4">Organisé et piloté par <a href="https://www.gw2.fr/" target="_blank" class="underline">GW2.FR</a> - Design par <a href="https://twitter.com/Phoenixia02" target="_blank" class="underline">Plume</a></p>
-            <p class="mt-4">Conçu et réalisé avec amour et une pincée de magie d'Hivernel par <a href="https://anthony-destenay.fr" target="_blank" class="underline">Thoanny</a> (<a href="https://www.lebusmagique.fr" target="_blank" class="underline">Le Bus Magique</a>)</p>
-            <p class="text-sm mt-4">© 2021 ArenaNet, Inc. Tous droits réservés. NCsoft, le logo NC, ArenaNet, Arena.net, Guild Wars, Guild Wars Factions, Factions, Guild Wars Nightfall, Nightfall, Guild Wars: Eye of the North, Guild Wars Eye of the North, Eye of the North, Guild Wars 2 et tous les logos et dessins associés sont des marques commerciales et/ou déposées de NCsoft Corporation. Toutes les autres marques commerciales appartiennent à leurs propriétaires respectifs.</p>
-            <p class="mt-8 text-sm"><a href="/mentions-legales" class="underline">Mentions légales et politique de confidentialité</a></p>
+            <p>
+                Concours sponsorisé par ArenaNet.
+                Organisé et piloté par <a href="https://www.gw2.fr/" target="_blank" class="underline">GW2.FR</a>.
+                Illustrations d'Aurene, Ho-Ho-Tron et de Poupée Princesse par <a href="https://twitter.com/Phoenixia02" target="_blank" class="underline">Plume</a>.
+                <br />Conçu et réalisé avec amour et une pincée de magie d'Hivernel par <a href="https://linktr.ee/thoanny" target="_blank" class="underline">Thoanny</a>.</p>
+            <p class="text-xs mt-4">© 2023 ArenaNet, Inc. Tous droits réservés. NCsoft, le logo NC, ArenaNet, Arena.net, Guild Wars, Guild Wars Factions, Factions, Guild Wars Nightfall, Nightfall, Guild Wars: Eye of the North, Guild Wars Eye of the North, Eye of the North, Guild Wars 2 et tous les logos et dessins associés sont des marques commerciales et/ou déposées de NCsoft Corporation. Toutes les autres marques commerciales appartiennent à leurs propriétaires respectifs.</p>
+            <p class="mt-8 flex justify-center gap-4 font-bold">
+                <a href="https://calendrier.gw2.fr/partenaires" class="hover:underline">Partenaires</a>
+                <a href="https://calendrier.gw2.fr/foire-aux-questions" class="hover:underline">FAQ</a>
+                <a href="https://calendrier.gw2.fr/mentions-legales" class="hover:underline">Mentions légales</a>
+            </p>
         </div>
     </div>
 
-    <script src="/build/runtime.4970d835.js" defer></script><script src="/build/578.616d6ab8.js" defer></script><script src="/build/app.e5d20bcc.js" defer></script>
-      
-      <script src="https://widget.gw2trivia.com/widget.js"></script>
-      <script>
-          (() => {
-              const uid = document.getElementById('uid');
-              const account = document.getElementById('account');
-              const token = document.getElementById('token');
-              document.getElementById('test-form').addEventListener('submit', e => {
-                  e.preventDefault();
+            <div class="max-w-sm py-4 px-6 mx-auto bg-white bg-opacity-90 rounded-3xl relative shadow-lg mfp-hide" id="menu">
+            <ul class="flex flex-col gap-2">
+                <li class="font-bold">
+                    <a href="https://calendrier.gw2.fr/conte-hivernel" class="flex gap-2 items-center">
+                        <i class="fa-solid fa-book text-2xl w-6 text-center"></i>
+                        Conte d'Hivernel
+                    </a>
+                </li>
+                <li class="font-bold">
+                    <a href="https://calendrier.gw2.fr/connexion" class="flex gap-2 items-center">
+                        <i class="fa-solid fa-unlock text-2xl w-6 text-center"></i>
+                        Connexion
+                    </a>
+                </li>
+                <li class="font-bold">
+                    <a href="https://calendrier.gw2.fr/inscription" class="flex gap-2 items-center">
+                        <i class="fa-solid fa-feather-pointed text-2xl w-6 text-center"></i>
+                        Inscription
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
+    <script>
+        const mentionsLegalesPopup = 'https://calendrier.gw2.fr/mentions-legales';
+    </script>
+    <script src="https://calendrier.gw2.fr/build/runtime.ec2b70cf.js" defer></script><script src="https://calendrier.gw2.fr/build/104.4485e463.js" defer></script><script src="https://calendrier.gw2.fr/build/app.155220e2.js" defer></script>
+    <script src="https://widget.gw2trivia.com/widget.js"></script>
+    <script>
+        (() => {
+            const uid = document.getElementById('uid');
+            const account = document.getElementById('account');
+            const token = document.getElementById('token');
+            document.getElementById('test-form').addEventListener('submit', e => {
+                e.preventDefault();
 
-                  document.body.appendChild(new OgdenQuiz(uid.value, account.value, token.value, {
-                      className: 'foo bar foo-bar'
-                  }));
+                document.body.appendChild(new OgdenQuiz(uid.value, account.value, token.value, {
+                    className: 'foo bar foo-bar'
+                }));
 
-                  return false;
-              })
-          })();
+                return false;
+            })
+        })();
     </script>
     
     </body>
