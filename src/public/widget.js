@@ -82,7 +82,7 @@ class OgdenQuiz extends HTMLElement {
       .notification {
         position: absolute;
         border-radius: 40px;
-        padding: 8px 16px;
+        padding: 6px 16px;
         text-align: center;
         top: -95px;
         right: 145px;
