@@ -88,6 +88,7 @@ class OgdenQuiz extends HTMLElement {
         right: 145px;
         box-shadow: 0 1px black;
         font-weight: bold;
+        background: rgba(255, 255, 255, .92);
       }
 
       .notification:not([hidden]) {
@@ -163,7 +164,7 @@ class OgdenQuiz extends HTMLElement {
 
       @keyframes floating {
         0% { transform: translate(0,  0px); }
-        50%  { transform: translate(0, 15px); }
+        50%  { transform: translate(0, 12px); }
         100%   { transform: translate(0, -0px); }    
       }
 
@@ -224,6 +225,7 @@ class OgdenQuiz extends HTMLElement {
 
     this.addEventListener('click', () => {
       this.classList.add('open');
+      this.shadow.querySelector('.notification').hidden = true;
     });
 
     this.shadow.querySelector('.close').addEventListener('click', (e) => {
@@ -289,6 +291,7 @@ class OgdenQuiz extends HTMLElement {
         innerText: title
       });
       this.shadow.querySelector('.not-already').hidden = false;
+      this.shadow.querySelector('.notification').hidden = false;
     })
     .catch(err => console.error(JSON.stringify(err)));
   }
