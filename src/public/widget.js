@@ -79,6 +79,22 @@ class OgdenQuiz extends HTMLElement {
         transform: translateY(-55%);
       }
 
+      .notification {
+        position: absolute;
+        border-radius: 40px;
+        padding: 6px 16px;
+        text-align: center;
+        top: -95px;
+        right: 145px;
+        box-shadow: 0 1px black;
+        font-weight: bold;
+        background: rgba(255, 255, 255, .92);
+      }
+
+      .notification:not([hidden]) {
+        display: inline-block;
+      }
+
       main, header, footer {
         padding: .75rem 1.5rem;
       }
@@ -139,6 +155,19 @@ class OgdenQuiz extends HTMLElement {
         color: red;
       }
 
+      .floating {  
+        animation-name: floating;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+      }
+
+      @keyframes floating {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 12px); }
+        100%   { transform: translate(0, -0px); }    
+      }
+
       @media (max-width: 500px) {
         :host {
           right: 0;
@@ -163,6 +192,7 @@ class OgdenQuiz extends HTMLElement {
         }
       }
     </style>
+    <aside class="notification floating" hidden>!</aside>
     <header>
       <h1>Questions pour un présent</h1>
       <div class="close">X</div>
@@ -195,6 +225,7 @@ class OgdenQuiz extends HTMLElement {
 
     this.addEventListener('click', () => {
       this.classList.add('open');
+      this.shadow.querySelector('.notification').hidden = true;
     });
 
     this.shadow.querySelector('.close').addEventListener('click', (e) => {
@@ -260,6 +291,7 @@ class OgdenQuiz extends HTMLElement {
         innerText: title
       });
       this.shadow.querySelector('.not-already').hidden = false;
+      this.shadow.querySelector('.notification').hidden = false;
     })
     .catch(err => console.error(JSON.stringify(err)));
   }
