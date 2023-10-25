@@ -5,16 +5,15 @@ class OgdenQuiz extends HTMLElement {
     return [];
   }
 
-  constructor(uid, anetAccount, token, options = {}) {
+  constructor(uid, anetAccount, options = {}) {
     // Always call super first in constructor
     super();
-    if (!uid || !anetAccount || !token) {
-      return console.error('An UID, an account and a token are required');
+    if (!uid || !anetAccount) {
+      return console.error('An UID and an account are required');
     }
 
     this.uid = uid;
     this.anetAccount = anetAccount;
-    this.token = token;
 
     this.shadow = this.attachShadow({mode: 'open'});
     this.shadow.innerHTML = `
@@ -307,7 +306,6 @@ class OgdenQuiz extends HTMLElement {
       body: JSON.stringify({
         uid: this.uid,
         account: this.anetAccount,
-        token: this.token,
         answer
       })
     })
