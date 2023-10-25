@@ -60,7 +60,6 @@
             <form action="#" id="test-form">
                 <label for="uid">UID : </label><input type="text" name="uid" id="uid"><br>
                 <label for="account">Account : </label><input type="text" name="account" id="account"><br>
-                <label for="token">Token : </label><input type="text" name="token" id="token"><br>
                 <input type="submit">
             </form>
             </div>
@@ -118,11 +117,10 @@
         (() => {
             const uid = document.getElementById('uid');
             const account = document.getElementById('account');
-            const token = document.getElementById('token');
             document.getElementById('test-form').addEventListener('submit', e => {
                 e.preventDefault();
 
-                document.body.appendChild(new OgdenQuiz(uid.value, account.value, token.value, {
+                document.body.appendChild(new OgdenQuiz(uid.value, account.value, {
                     className: 'foo bar foo-bar'
                 }));
 

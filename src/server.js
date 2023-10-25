@@ -67,7 +67,7 @@ const testAnswer = (answers, text) => {
 };
 
 app.post('/check_answer', async (req, res) => {
-    const { uid, account, token, answer } = req.body;
+    const { uid, account, answer } = req.body;
     try {
         const { rows } = await pgPool.query("SELECT COUNT(*) FROM participations WHERE (date+'2:00')::date = $1 AND account = $2 AND valid is TRUE", [now(), account]);
         console.log(rows);
@@ -83,8 +83,7 @@ app.post('/check_answer', async (req, res) => {
         if (result) {
             const data = {
                 uid,
-                account,
-                token
+                account
             };
             const hash = crypto.createHmac(process.env.CRYPTO_ALGO || 'sha1', process.env.CRYPTO_SECRET).update((new URLSearchParams(data)).toString()).digest('hex');
             data.signature = hash;
@@ -106,20 +105,20 @@ app.post('/check_answer', async (req, res) => {
                 */
                 switch (res.status) {
                     case 200:
-                        await pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, result]);
+                        await pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4)', [account, answer, ip, result]);
                         break;
                     default:
-                        await pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, false]);
+                        await pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4)', [account, answer, ip, false]);
                         ret.error = `Une erreur (code :  ${res.status}) est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.`;
                         break;
                 }
             }).catch(async err => {
                 console.error(err);
-                pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, false]);
+                pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4)', [account, answer, ip, false]);
                 ret.error = `Une erreur est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.`;
             });
         } else {
-            pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4, $5)', [account, answer, ip, result]);
+            pgPool.query('INSERT INTO participations (account, content, ip, valid) VALUES ($1, $2, $3, $4)', [account, answer, ip, result]);
         }
 
         console.log('returning ', ret);
