@@ -154,6 +154,15 @@ class OgdenQuiz extends HTMLElement {
         color: red;
       }
 
+      details > summary {
+        list-style-type: '🙈';
+        cursor: help;
+      }
+
+      details[open] > summary {
+        list-style-type: '🐵';
+      }
+
       .floating {  
         animation-name: floating;
         animation-duration: 3s;
@@ -202,7 +211,7 @@ class OgdenQuiz extends HTMLElement {
       </div>
       <div class="not-already" hidden>
         <p>Répondez à la question du jour d'Ogden pour gagner des points.</p>
-        <p><strong><a id="question-title" href="https://gw2trivia.com/questions/view/2626/seul-au-milieu-des-vastes-etendues-desolees-je-veille-sur-les-secrets-dissimules-par-les-millenaires-qui-suis-je" target="_blank">Seul au milieu des vastes étendues désolées, je veille sur les secrets dissimulés par les millénaires. Qui suis-je ? </a></strong></p>
+        <p><strong><a id="question-title" href="https://gw2trivia.com/questions/view/2626/seul-au-milieu-des-vastes-etendues-desolees-je-veille-sur-les-secrets-dissimules-par-les-millenaires-qui-suis-je" target="_blank">Seul au milieu des vastes étendues désolées, je veille sur les secrets dissimulés par les millénaires. Qui suis-je ?</a></strong></p>
         <form action="#" method="post">
           <input type="text" id="answer" name="answer" placeholder="Votre réponse" required/>
           <input type="submit" class="btn"/>
@@ -211,6 +220,13 @@ class OgdenQuiz extends HTMLElement {
       <div class="success" hidden>Vous avez trouvé la bonne réponse ! Revenez demain pour une nouvelle question.</div>
       <div class="fail" hidden>Ce n'est pas la réponse attendue.</div>
       <div class="error"></div>
+      <details class="yesterday" hidden>
+        <summary>Réponse de la veille</summary>
+        <p>
+          <a id="yesterday-question-title" href="https://gw2trivia.com/questions/view/2626/seul-au-milieu-des-vastes-etendues-desolees-je-veille-sur-les-secrets-dissimules-par-les-millenaires-qui-suis-je" target="_blank">Seul au milieu des vastes étendues désolées, je veille sur les secrets dissimulés par les millénaires. Qui suis-je ?</a><br/>
+          Réponse : <em><span id="yesterday-answer"></span></em>
+        </p>
+      </details>
     </main>
     <footer>
       <div>Plus de questions sur <a href="https://discord.gg/PDXyUjtahe" rel="noreferrer" target="_blank"><img title="Discord de Questions pour un Quaggan" src="https://img.icons8.com/color/344/discord-new-logo.png" width="24" height="24"/></a> - <a href="https://gw2trivia.com" rel="noreferrer" target="_blank"><img title="Site de GW2Trivia" src="https://gw2trivia.com/img/icon_64.png" width="24" height="24"/></a></div>
@@ -258,6 +274,36 @@ class OgdenQuiz extends HTMLElement {
         });
       }
       return response.data;
+    })
+    .catch(err => console.error(JSON.stringify(err)));
+  }
+
+  fetchPreviousAnswer() {
+    console.debug('Fetching answer for yesterday');
+    fetch('https://widget.gw2trivia.com/yesterday_answer', {
+      method: "get",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+		.then(response => response.json())
+    .then(response => {
+      console.debug(response);
+      const titleEl = this.shadow.getElementById('yesterday-question-title');
+      const answerEl = this.shadow.getElementById('yesterday-answer');
+
+      if (response.error) {
+        return console.error(response.error);
+      }
+
+      const { external_id, title, displayed_response } = response.data;
+      Object.assign(titleEl, {
+        href: `https://gw2trivia.com/questions/view/${external_id}/calendar`,
+        innerText: title
+      });
+      answerEl.innerText = displayed_response;
+      this.shadow.querySelector('.yesterday').hidden = false;
     })
     .catch(err => console.error(JSON.stringify(err)));
   }
@@ -326,6 +372,7 @@ class OgdenQuiz extends HTMLElement {
   }
 
   async main() {
+    this.fetchPreviousAnswer();
     if (await this.checkAccount()) {
       // already participated
       this.shadow.querySelector('.already').hidden = false;
