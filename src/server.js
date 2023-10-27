@@ -49,6 +49,21 @@ app.get('/question_of_the_day', async (req, res) => {
     }
 });
 
+app.get('/yesterday_answer', async (req, res) => {
+    try {
+        let yesterday = now();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const { rows: questionRows } = await pgPool.query("SELECT external_id, title, displayed_response FROM questions WHERE date = $1", [yesterday])
+        if (!questionRows.length) {
+            return res.send({ error: 'Pas de question pour hier !' });
+        }
+        res.send({ data: questionRows[0] });
+    } catch (e) {
+        console.error(e);
+        return res.send({ error: 'Une erreur est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.' });
+    }
+});
+
 app.post('/check_account', async (req, res) => {
     const { account } = req.body;
     try {
