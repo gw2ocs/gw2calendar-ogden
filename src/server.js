@@ -64,6 +64,23 @@ app.get('/yesterday_answer', async (req, res) => {
     }
 });
 
+app.get('/previous_answers', async (req, res) => {
+    try {
+        let yesterday = now();
+        let start = now();
+        yesterday.setDate(yesterday.getDate() - 1);
+        start.setDate(1);
+        const { rows: questionRows } = await pgPool.query("SELECT q.date, q.title, q.displayed_response, q.external_id, COUNT(p.id) AS good_answers FROM questions q LEFT JOIN participations p ON (p.date+'2:00')::date = q.date AND p.valid IS TRUE WHERE q.date <= $1 AND q.date >= $2 GROUP BY q.date, q.title, q.displayed_response, q.external_id", [yesterday, start])
+        if (!questionRows.length) {
+            return res.send({ error: 'Pas de questions précédentes !' });
+        }
+        res.send({ data: questionRows });
+    } catch (e) {
+        console.error(e);
+        return res.send({ error: 'Une erreur est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.' });
+    }
+});
+
 app.post('/check_account', async (req, res) => {
     const { account } = req.body;
     try {
