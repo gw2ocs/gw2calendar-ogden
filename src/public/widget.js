@@ -222,10 +222,8 @@ class OgdenQuiz extends HTMLElement {
       <div class="error"></div>
       <details class="yesterday" hidden>
         <summary>Réponse de la veille</summary>
-        <p>
-          <a id="yesterday-question-title" href="https://gw2trivia.com/questions/view/2626/seul-au-milieu-des-vastes-etendues-desolees-je-veille-sur-les-secrets-dissimules-par-les-millenaires-qui-suis-je" target="_blank">Seul au milieu des vastes étendues désolées, je veille sur les secrets dissimulés par les millénaires. Qui suis-je ?</a><br/>
-          Réponse : <em><span id="yesterday-answer"></span></em>
-        </p>
+        <a id="yesterday-question-title" href="https://gw2trivia.com/questions/view/2626/seul-au-milieu-des-vastes-etendues-desolees-je-veille-sur-les-secrets-dissimules-par-les-millenaires-qui-suis-je" target="_blank">Seul au milieu des vastes étendues désolées, je veille sur les secrets dissimulés par les millénaires. Qui suis-je ?</a><br/>
+        Réponse : <em><span id="yesterday-answer"></span></em>
       </details>
     </main>
     <footer>
