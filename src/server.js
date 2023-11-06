@@ -53,7 +53,7 @@ app.get('/yesterday_answer', async (req, res) => {
     try {
         let yesterday = now();
         yesterday.setDate(yesterday.getDate() - 1);
-        const { rows: questionRows } = await pgPool.query("SELECT external_id, title, displayed_response FROM questions WHERE date = $1", [yesterday])
+        const { rows: questionRows } = await pgPool.query("SELECT external_id, title, displayed_response FROM questions WHERE date = $1", [yesterday]);
         if (!questionRows.length) {
             return res.send({ error: 'Pas de question pour hier !' });
         }
@@ -70,11 +70,27 @@ app.get('/previous_answers', async (req, res) => {
         let start = now();
         yesterday.setDate(yesterday.getDate() - 1);
         start.setDate(1);
-        const { rows: questionRows } = await pgPool.query("SELECT q.date, q.title, q.displayed_response, q.external_id, COUNT(p.id) AS good_answers FROM questions q LEFT JOIN participations p ON (p.date+'2:00')::date = q.date AND p.valid IS TRUE WHERE q.date <= $1 AND q.date >= $2 GROUP BY q.date, q.title, q.displayed_response, q.external_id", [yesterday, start])
+        const { rows: questionRows } = await pgPool.query("SELECT q.date, q.title, q.displayed_response, q.external_id, COUNT(p.id) AS good_answers FROM questions q LEFT JOIN participations p ON (p.date+'2:00')::date = q.date AND p.valid IS TRUE WHERE q.date <= $1 AND q.date >= $2 GROUP BY q.date, q.title, q.displayed_response, q.external_id", [yesterday, start]);
         if (!questionRows.length) {
             return res.send({ error: 'Pas de questions précédentes !' });
         }
         res.send({ data: questionRows });
+    } catch (e) {
+        console.error(e);
+        return res.send({ error: 'Une erreur est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.' });
+    }
+});
+
+app.get('/top', async (req, res) => {
+    try {
+        const { limit = 100 } = req.query;
+        let start = now();
+        start.setDate(1);
+        const { rows: scoreRows } = await pgPool.query("SELECT account, COUNT(*) AS good_answers FROM participations WHERE valid IS TRUE and (date+'2:00')::date >= $1 GROUP BY account ORDER BY COUNT(*) DESC LIMIT $2", [start, limit]);
+        if (!scoreRows.length) {
+            return res.send({ error: 'Pas de scores !' });
+        }
+        res.send({ data: scoreRows });
     } catch (e) {
         console.error(e);
         return res.send({ error: 'Une erreur est survenue, veuillez essayer à nouveau. Si le problème persiste, merci de contacter l\'administrateur.' });
