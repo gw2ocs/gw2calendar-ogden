@@ -66,11 +66,18 @@ app.get('/yesterday_answer', async (req, res) => {
 
 app.get('/previous_answers', async (req, res) => {
     try {
+        // security to prevent showing future answers
         let yesterday = now();
-        let start = now();
         yesterday.setDate(yesterday.getDate() - 1);
+
+        let start = now();
+        const { year = start.getFullYear(), month = start.getMonth() + 1 } = req.query;
         start.setDate(1);
-        const { rows: questionRows } = await pgPool.query("SELECT q.date, q.title, q.displayed_response, q.external_id, COUNT(p.id) AS good_answers FROM questions q LEFT JOIN participations p ON (p.date+'2:00')::date = q.date AND p.valid IS TRUE WHERE q.date <= $1 AND q.date >= $2 GROUP BY q.date, q.title, q.displayed_response, q.external_id", [yesterday, start]);
+        start.setFullYear(year);
+        start.setMonth(month - 1);
+        let end = new Date(start);
+        end.setMonth(month);
+        const { rows: questionRows } = await pgPool.query("SELECT q.date, q.title, q.displayed_response, q.external_id, COUNT(p.id) AS good_answers FROM questions q LEFT JOIN participations p ON (p.date+'2:00')::date = q.date AND p.valid IS TRUE WHERE q.date <= $1 AND q.date >= $2 AND q.date < $3 GROUP BY q.date, q.title, q.displayed_response, q.external_id", [yesterday, start, end]);
         if (!questionRows.length) {
             return res.send({ error: 'Pas de questions précédentes !' });
         }
@@ -83,10 +90,14 @@ app.get('/previous_answers', async (req, res) => {
 
 app.get('/top', async (req, res) => {
     try {
-        const { limit = 100 } = req.query;
         let start = now();
+        const { limit = 100, year = start.getFullYear(), month = start.getMonth() + 1 } = req.query;
         start.setDate(1);
-        const { rows: scoreRows } = await pgPool.query("SELECT account, COUNT(*) AS good_answers FROM participations WHERE valid IS TRUE and (date+'2:00')::date >= $1 GROUP BY account ORDER BY COUNT(*) DESC LIMIT $2", [start, limit]);
+        start.setFullYear(year);
+        start.setMonth(month - 1);
+        let end = new Date(start);
+        end.setMonth(month);
+        const { rows: scoreRows } = await pgPool.query("SELECT account, COUNT(*) AS good_answers FROM participations WHERE valid IS TRUE AND (date+'2:00')::date >= $1 AND (date+'2:00')::date < $2 GROUP BY account ORDER BY COUNT(*) DESC LIMIT $3", [start, end, limit]);
         if (!scoreRows.length) {
             return res.send({ error: 'Pas de scores !' });
         }
