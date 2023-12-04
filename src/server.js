@@ -77,7 +77,7 @@ app.get('/previous_answers', async (req, res) => {
         start.setMonth(month - 1);
         let end = new Date(start);
         end.setMonth(month);
-        const { rows: questionRows } = await pgPool.query("SELECT q.date, q.title, q.displayed_response, q.external_id, COUNT(p.id) AS good_answers FROM questions q LEFT JOIN participations p ON (p.date+'2:00')::date = q.date AND p.valid IS TRUE WHERE q.date <= $1 AND q.date >= $2 AND q.date < $3 GROUP BY q.date, q.title, q.displayed_response, q.external_id", [yesterday, start, end]);
+        const { rows: questionRows } = await pgPool.query("SELECT q.date, q.title, q.displayed_response, q.external_id, COUNT(p.id) AS good_answers FROM questions q LEFT JOIN participations p ON (p.date+'1:00')::date = q.date AND p.valid IS TRUE WHERE q.date <= $1 AND q.date >= $2 AND q.date < $3 GROUP BY q.date, q.title, q.displayed_response, q.external_id ORDER BY q.date ASC", [yesterday, start, end]);
         if (!questionRows.length) {
             return res.send({ error: 'Pas de questions précédentes !' });
         }
@@ -97,7 +97,7 @@ app.get('/top', async (req, res) => {
         start.setMonth(month - 1);
         let end = new Date(start);
         end.setMonth(month);
-        const { rows: scoreRows } = await pgPool.query("SELECT account, COUNT(*) AS good_answers FROM participations WHERE valid IS TRUE AND (date+'2:00')::date >= $1 AND (date+'2:00')::date < $2 GROUP BY account ORDER BY COUNT(*) DESC LIMIT $3", [start, end, limit]);
+        const { rows: scoreRows } = await pgPool.query("SELECT account, COUNT(*) AS good_answers, AVG((date+'1:00') - (date+'1:00')::date) AS average_answer_time FROM participations WHERE valid IS TRUE AND (date+'1:00')::date >= $1 AND (date+'1:00')::date < $2 GROUP BY account ORDER BY COUNT(*) DESC, SUM((date+'1:00') - (date+'1:00')::date) LIMIT $3", [start, end, limit]);
         if (!scoreRows.length) {
             return res.send({ error: 'Pas de scores !' });
         }
@@ -111,7 +111,7 @@ app.get('/top', async (req, res) => {
 app.post('/check_account', async (req, res) => {
     const { account } = req.body;
     try {
-        const { rows } = await pgPool.query("SELECT COUNT(*) FROM participations WHERE (date+'2:00')::date = $1 AND account = $2 AND valid is TRUE", [now(), account]);
+        const { rows } = await pgPool.query("SELECT COUNT(*) FROM participations WHERE (date+'1:00')::date = $1 AND account = $2 AND valid is TRUE", [now(), account]);
         res.send({ data: rows[0].count !== '0' }); 
     } catch (e) {
         console.error(e);
@@ -128,7 +128,7 @@ const testAnswer = (answers, text) => {
 app.post('/check_answer', async (req, res) => {
     const { uid, account, answer } = req.body;
     try {
-        const { rows } = await pgPool.query("SELECT COUNT(*) FROM participations WHERE (date+'2:00')::date = $1 AND account = $2 AND valid is TRUE", [now(), account]);
+        const { rows } = await pgPool.query("SELECT COUNT(*) FROM participations WHERE (date+'1:00')::date = $1 AND account = $2 AND valid is TRUE", [now(), account]);
         console.log(rows);
         if (rows[0].count !== '0') {
             return res.send({ error: 'Vous avez déjà participé aujourd\'hui. Revenez demain pour la prochaine question !'});
