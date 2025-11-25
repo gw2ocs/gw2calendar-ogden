@@ -202,7 +202,7 @@ class OgdenQuiz extends HTMLElement {
     </style>
     <aside class="notification floating" hidden>Nouvelle question !</aside>
     <header>
-      <h1>Questions pour un présent</h1>
+      <h1>Questions pour un flocon</h1>
       <div class="close">X</div>
     </header>
     <main>
@@ -217,7 +217,7 @@ class OgdenQuiz extends HTMLElement {
         </p>
         <p><strong><a id="question-title" href="https://gw2trivia.com/questions/view/2626/seul-au-milieu-des-vastes-etendues-desolees-je-veille-sur-les-secrets-dissimules-par-les-millenaires-qui-suis-je" target="_blank">Seul au milieu des vastes étendues désolées, je veille sur les secrets dissimulés par les millénaires. Qui suis-je ?</a></strong></p>
         <form action="#" method="post">
-          <input type="text" id="answer" name="answer" placeholder="Votre réponse" required/>
+          <input type="text" id="answer" name="answer" placeholder="Votre réponse (250 caractères max.)" maxlength="250" required/>
           <input type="submit" class="btn"/>
         </form>
       </div>
@@ -385,11 +385,17 @@ class OgdenQuiz extends HTMLElement {
     formEl.addEventListener('submit', async e => {
       e.preventDefault();
 
+      // prevent submitting the form multiple times at once
+      if (formEl.hasAttribute('disabled')) return false;
+      formEl.setAttribute('disabled', true);
+
       this.shadow.querySelector('.success').hidden = true;
       this.shadow.querySelector('.fail').hidden = true;
       this.shadow.querySelector('.error').hidden = true;
 
       const result = await this.checkAnswer(this.shadow.getElementById('answer').value);
+
+      formEl.removeAttribute('disabled');
 
       if (result === false) {
         this.shadow.querySelector('.fail').hidden = false;
